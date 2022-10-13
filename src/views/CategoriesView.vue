@@ -34,9 +34,9 @@ h1 {
   text-align: center;
 }
 @media (min-width: 1024px) {
-h1 {
-  padding-left: 1rem;
-  text-align: initial;
-}
+  h1 {
+    padding-left: 1rem;
+    text-align: initial;
+  }
 }
 </style>
