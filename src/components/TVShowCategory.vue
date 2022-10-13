@@ -86,11 +86,14 @@ export default defineComponent({
 }
 
 h1 {
+  font-size: 120%;
+  margin-bottom: 0;
   text-align: center;
 }
 
 @media (min-width: 1024px) {
   h1 {
+    padding-left: 1rem;
     text-align: initial;
   }
 }

@@ -21,7 +21,6 @@ const filterOnGenres = (shows: Show[], genreFilter: string[]): Show[] => {
 
 <template>
   <h1>Categories</h1>
-  {{ genres }}
   <Category
     v-for="genre in props.genres.keys()"
     :key="genre"
@@ -30,4 +29,14 @@ const filterOnGenres = (shows: Show[], genreFilter: string[]): Show[] => {
   ></Category>
 </template>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  text-align: center;
+}
+@media (min-width: 1024px) {
+h1 {
+  padding-left: 1rem;
+  text-align: initial;
+}
+}
+</style>
