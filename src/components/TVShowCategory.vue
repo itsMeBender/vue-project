@@ -27,12 +27,7 @@ export default defineComponent({
     },
   },
   setup(props): any {
-    // TODO: Getting problems to keep the reactivity on the prop:
-    // const myShows = toRef(props, 'tvShows');
-    // const { tvShows: myShows } = toRefs(props);
-    // https://stackoverflow.com/questions/69855836/props-gotten-directly-from-vue-3-setup-are-not-reactive
-    const myShows = props.tvShows; // TODO: Add genre filter, if time
-
+    const myShows = props.tvShows;
     const showOverlay = ref<boolean>();
     const viewCardsHorizontal = ref<boolean>();
     const tvShowDetail = ref<Show | undefined>();

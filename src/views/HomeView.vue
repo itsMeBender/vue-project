@@ -24,11 +24,6 @@ export default defineComponent({
   },
 
   setup(props): any {
-    // TODO: Getting problems to keep the reactivity on the prop:
-    // const myShows = toRef(props, 'tvShows');
-    // const { tvShows: myShows } = toRefs(props);
-    // https://stackoverflow.com/questions/69855836/props-gotten-directly-from-vue-3-setup-are-not-reactive
-
     const showOverlay = ref<boolean>();
     const watching = ref<Show[]>();
     const randomShow: Show =
