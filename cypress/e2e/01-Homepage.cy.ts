@@ -13,7 +13,7 @@ describe("A. My TV-Show", () => {
   });
 
   it("shows standard navigation", () => {
-    cy.get("header + nav").children().should("have.length", 2);
+    cy.get("header + nav").children().should("have.length", 3);
   });
 
   it("default navigation is 'TV-Home'", () => {
@@ -50,6 +50,9 @@ describe("B. Navigating", () => {
           case 1:
             expect(el.innerText).to.eq("Categories");
             break;
+          case 2:
+            expect(el.innerText).to.eq("Search");
+            break;
           default:
             throw new Error("More navigation items found than expected");
         }
@@ -58,7 +61,7 @@ describe("B. Navigating", () => {
   });
 
   it("to 'Categories'", () => {
-    cy.get("header + nav > a:last-child")
+    cy.get("header + nav > a:nth-child(2)")
       .click()
       .url()
       .should("eq", "http://localhost:5173/categories");
@@ -72,10 +75,14 @@ describe("B. Navigating", () => {
           // Router view NOT ACTIVE
           expect(nav.hasClass("router-link-active")).to.eq(false);
           expect(nav.hasClass("router-link-exact-active")).to.eq(false);
-        } else {
+        } else if (idx === 1) {
           // ACTIVE
           expect(nav.hasClass("router-link-active")).to.eq(true);
           expect(nav.hasClass("router-link-exact-active")).to.eq(true);
+        } else {
+          // Router view NOT ACTIVE
+          expect(nav.hasClass("router-link-active")).to.eq(false);
+          expect(nav.hasClass("router-link-exact-active")).to.eq(false);
         }
       });
   });
@@ -103,7 +110,7 @@ describe("C. Data for TV-Show", () => {
       });
   });
 
-  it("starts with the app root url loading fixture", () => {
+  it("TODO: starts with the app root url loading fixture", () => {
     cy.visit("/");
   });
 });
