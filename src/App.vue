@@ -13,6 +13,7 @@ import type { Show } from "@/tvAppTypes";
   <nav id="nav-container">
     <RouterLink to="/">TV-Home</RouterLink>
     <RouterLink to="/categories">Categories</RouterLink>
+    <RouterLink to="/Search">Search</RouterLink>
   </nav>
 
   <RouterView :tvShows="tvShows" :genres="genres" />
