@@ -8,7 +8,14 @@ const props = defineProps<{
   toggle: any; // click: ((payload: MouseEvent) => void) | undefined
 }>();
 
-const tvImg = new URL(`${props.tvShow.image.original}`, import.meta.url).href;
+let tvImg: string;
+if (props?.tvShow?.image?.original) {
+  tvImg = new URL(`${props.tvShow.image.original}`, import.meta.url)
+  .href;
+} else {
+  tvImg = new URL('/src/assets/noimage.png', import.meta.url)
+  .href;
+}
 </script>
 
 <template>

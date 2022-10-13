@@ -9,8 +9,14 @@ const props = defineProps<{
   tvShow: Show;
 }>();
 
-const thumbnailUri = new URL(`${props.tvShow.image.original}`, import.meta.url)
+let thumbnailUri: string;
+if (props?.tvShow?.image?.medium) {
+  thumbnailUri = new URL(`${props.tvShow.image.original}`, import.meta.url)
   .href;
+} else {
+  thumbnailUri = new URL('/src/assets/noimage.png', import.meta.url)
+  .href;
+}
 
 const addShowToList = () => {
   props.addShow();
