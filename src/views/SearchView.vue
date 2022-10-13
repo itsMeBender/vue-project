@@ -42,9 +42,27 @@ export default defineComponent({
       }, {});
     };
 
+    // TODO: Code duplication
+    // Messy code ID number vs String
+    const getTvShowById = (id: string): Show => {
+      const selecteShow = tvShows.value!.find((show: Show) => {
+        return show.id.toString() === id;
+      });
+      console.log('PSP-Z', selecteShow!.name);
+      if (selecteShow) {
+        return selecteShow;
+      } else {
+        // TODO: Create an empty show with a warning
+        return {} as Show;
+      }
+    };
+
     const toggleOverlay = (id: any): void => {
       showOverlay.value = !showOverlay.value;
-      console.log("PSP-ID", id);
+      if (typeof id === 'number' ) {
+        console.log("PSP-ID", id, getTvShowById(id.toString()).name);
+        tvShowDetail.value = getTvShowById(id.toString());
+      }
     };
 
     // TODO: Code duplication
@@ -109,7 +127,7 @@ export default defineComponent({
     <teleport to="#modal-area">
       <TVShowOverlay
         v-if="showOverlay"
-        :tvShow="tvShows[0]"
+        :tvShow="tvShowDetail"
         :toggle="toggleOverlay"
       ></TVShowOverlay>
     </teleport>
