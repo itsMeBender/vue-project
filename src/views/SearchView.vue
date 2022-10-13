@@ -44,7 +44,7 @@ export default defineComponent({
 
     const toggleOverlay = (id: any): void => {
       showOverlay.value = !showOverlay.value;
-      console.log('PSP-ID', id);
+      console.log("PSP-ID", id);
     };
 
     // TODO: Code duplication
