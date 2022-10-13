@@ -1,0 +1,28 @@
+[
+    {
+        "genres": ["testa"],
+        "id": "tvshow01",
+        "image": {
+            "medium": "http://localhost:5173/public/tv-banner-800px.jpg",
+            "original": "http://localhost:5173/public/tv-banner-800px.jpg"
+        },
+        "name": "Name of tv-show one",
+        "summary": "A summary of tv-show one",
+        "rating": {
+            "average": 5.0
+        }
+    },
+    {
+        "genres": ["testa", "testb"],
+        "id": "tvshow02",
+        "image": {
+            "medium": "http://localhost:5173/public/tv-banner-800px.jpg",
+            "original": "http://localhost:5173/public/tv-banner-800px.jpg"
+        },
+        "name": "Name of tv-show two",
+        "summary": "A summary of tv-show two",
+        "rating": {
+            "average": 10.0
+        }
+    }
+]

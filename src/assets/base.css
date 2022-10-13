@@ -1,0 +1,53 @@
+:root {
+  --vt-c-primair: #4c2b70;
+  --vt-c-primair-lite: #ddd6ff;
+  --vt-c-secundair: #FFE911;
+  --vt-c-white: #fdfdfd;
+  --vt-c-black: #181818;
+  --vt-c-text-light-1: var(--vt-c-primair);
+  --vt-c-text-light-2: rgba(60, 60, 60, 0.85);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.90);
+}
+
+:root {
+  --color-background: var(--vt-c-white);
+  --color-text: var(--vt-c-text-light-1);
+}
+
+@media (prefers-color-scheme: light) { /** TODO PSP **/
+  :root {
+    --color-background: var(--vt-c-primair-lite);
+    --color-text: var(--vt-c-text-light-2);
+    --color-background-overlay:  rgba(221, 214, 255, 0.85);/* var(--vt-c-primair-lite); */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-text: var(--vt-c-text-dark-2);
+    --color-background-overlay: rgba(22, 22, 22, 0.65);
+  }
+}
+
+a {
+  color: var(--vt-c-secundair);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  /* transition: color 0.5s, background-color 0.5s; */
+  line-height: 1.6;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.2em; /* Using rem units */
+  /* text-rendering: optimizeLegibility; */
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
+}

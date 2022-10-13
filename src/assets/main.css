@@ -1,0 +1,54 @@
+@import "./base.css";
+
+body {
+  margin: 0;
+}
+
+button {
+  background-color: var(--vt-c-primair);
+  border: thin solid var(--vt-c-primair);
+  border-radius: 0;
+  color: var(--vt-c-secundair);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.3rem 1rem;
+}
+button:hover {
+  color: var(--vt-c-white);
+  border-color: var(--vt-c-secundair);
+  cursor: pointer;
+}
+
+#app {
+  font-weight: normal;
+}
+#modal-area {
+  width: 100vw;
+}
+
+span.icon {
+  background-color: var(--color-background-overlay);
+  border-radius: 2rem;
+  cursor: pointer;
+  display: block;
+  height: 4rem;
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 4rem;
+}
+
+span.icon svg {
+  display: block;
+  fill: var(--color-text);
+  position: absolute;
+  right: 1.6rem;
+  top: 1.2rem;
+  transform: scale(2);
+}
+span.icon:hover svg {
+  fill: var(--vt-c-secundair);
+}
+
+@media (min-width: 1024px) {
+}
