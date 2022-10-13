@@ -11,6 +11,7 @@
 }
 
 :root {
+  --color-background-nav:  rgba(76, 43, 112, 0.85);
   --color-background: var(--vt-c-white);
   --color-text: var(--vt-c-text-light-1);
 }

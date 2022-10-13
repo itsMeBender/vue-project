@@ -98,9 +98,8 @@ header {
 }
 
 nav {
-  background-color: var(--vt-c-primair);
+  background-color: var(--color-background-nav);
   box-sizing: border-box;
-  opacity: 0.75;
   padding: 0.5rem 0;
   position: sticky;
   position: -webkit-sticky;
@@ -111,19 +110,14 @@ nav {
 nav a {
   display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
 }
 nav > a {
   margin-left: 2rem;
 }
 nav a.router-link-exact-active {
+  background-color: var(--vt-c-primair);
   font-weight: bold;
-}
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-nav a:first-of-type {
-  border: 0;
+  border-bottom: thin solid var(--vt-c-secundair);
 }
 
 .banner {

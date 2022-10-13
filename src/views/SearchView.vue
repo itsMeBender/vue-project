@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-// import TVShowCard from "@/components/TVShowCard.vue";
+import IconSearch from "@/components/icons/IconSearch.vue";
+import TVShowCard from "@/components/TVShowCard.vue";
 import TVShowOverlay from "@/components/TVShowOverlay.vue";
 import type { Show } from "@/tvAppTypes";
 
@@ -9,48 +10,116 @@ import type { Show } from "@/tvAppTypes";
 // https://www.bezkoder.com/vue-3-typescript-axios/
 export default defineComponent({
   components: {
-    // TVShowCard,
+    TVShowCard,
+    IconSearch,
     TVShowOverlay,
   },
 
   props: {
-    tvShows: {
-      // Object as PropType<Show>
-      type: Array<Show>,
-      required: true,
-    },
+    // tvShows: {
+    //   // Object as PropType<Show>
+    //   type: Array<Show>,
+    //   required: true,
+    // },
   },
 
-  setup(props): any {
+  // setup(props): any {
+  setup(): any {
     const showOverlay = ref<boolean>();
+    const searchfor = ref<string>();
+    const tvShowDetail = ref<Show>();
+    const tvShows = ref<Show[]>();
+
+    const tvShowProps = [
+      // TODO: Code duplication
+      "genres",
+      "id",
+      "image",
+      "name",
+      "summary",
+      "rating",
+      "schedule",
+    ];
+
+    // let tvShows: Show[] = [];
+    
+    // TODO: Code duplication
+    const extractTvShowDataByProps = (tvShow: any, props: string[]): Show[] => {
+      return props.reduce((aShow: any, prop: string) => {
+        if (tvShow && Object.prototype.hasOwnProperty.call(tvShow, prop)) {
+          aShow[prop] = tvShow[prop];
+        }
+        return aShow;
+      }, {});
+    };
 
     const toggleOverlay = (): void => {
       showOverlay.value = !showOverlay.value;
     };
 
+    // TODO: Code duplication
+    const fetchShowQuery = async (uri: string): Promise<Show[]> => {
+      const fetchShows = await fetch(uri);
+      const shows = await fetchShows.json();
+      return shows.map((data: any) =>
+        extractTvShowDataByProps(data.show, tvShowProps)
+      );
+    };
+
+    const startSearch = async () => {
+      let uri = "https://api.tvmaze.com/search/shows?q=" + searchfor.value;
+      try {
+        uri = decodeURI(uri);
+        tvShows.value = await fetchShowQuery(uri);
+      } catch (e) {
+        alert(e);
+      }
+    };
+
     showOverlay.value = false;
-    return { showOverlay, toggleOverlay };
+    return {
+      searchfor,
+      tvShows,
+      tvShowDetail,
+      showOverlay,
+      startSearch,
+      toggleOverlay,
+    };
   },
 });
 </script>
 
 <template>
   <main>
-    <h1>Search</h1>
+    <h1>
+      Search for <span>'{{ searchfor }}'</span>
+    </h1>
     <div class="results">
-        <p>Search results</p>
-      <!-- <TvShowCard
+      <form name="fullSearch" @submit.prevent="startSearch">
+        <fieldset>
+          <input
+            v-model="searchfor"
+            type="text"
+            placeholder="Enter tv-show search"
+          />
+          <button :disabled="!searchfor"><IconSearch /></button>
+        </fieldset>
+      </form>
+      <TVShowCard
         v-for="show in tvShows"
         :key="show.id"
         :tvShow="show"
         class="tvShowCard"
         @click="toggleOverlay(show.id)"
-      ></TvShowCard> -->
+      ></TVShowCard>
     </div>
+    {{ tvShows }}
+    :tvShow="tvShowDetail"
+
     <teleport to="#modal-area">
       <TVShowOverlay
         v-if="showOverlay"
-        :tvShow="tvShowDetail"
+        :tvShow="tvShows[0]"
         :toggle="toggleOverlay"
       ></TVShowOverlay>
     </teleport>
@@ -58,6 +127,45 @@ export default defineComponent({
 </template>
 
 <style scoped>
+button {
+  height: 2.5rem;
+  padding: 0 1rem;
+}
+button:disabled svg {
+  fill: var(--vt-c-text-light-2);
+}
+
+fieldset {
+  border: none;
+  padding: 0 0 0 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+h1 > span {
+  font-weight: 200;
+  font-style: italic;
+}
+
+input {
+  border: none;
+  display: inline-block;
+  font-size: 1.5rem;
+  height: 2rem;
+  padding: 0.2rem 1rem;
+}
+input:focus {
+  outline: none;
+}
+
+svg {
+  transform: scale(1.6);
+}
 @media (min-width: 1024px) {
+  h1 {
+    padding-left: 1rem;
+    text-align: initial;
+  }
 }
 </style>

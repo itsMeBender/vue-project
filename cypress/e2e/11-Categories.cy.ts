@@ -13,9 +13,8 @@ describe("A. TODO - Category", () => {
 
     // Navigate to Categories
     cy.get("header + nav > a:nth-child(2)")
-    .click()
-    .url()
-    .should("eq", "http://localhost:5173/categories");
+      .click()
+      .url()
+      .should("eq", "http://localhost:5173/categories");
   });
-
 });
