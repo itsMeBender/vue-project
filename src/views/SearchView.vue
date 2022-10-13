@@ -14,16 +14,7 @@ export default defineComponent({
     IconSearch,
     TVShowOverlay,
   },
-
-  props: {
-    // tvShows: {
-    //   // Object as PropType<Show>
-    //   type: Array<Show>,
-    //   required: true,
-    // },
-  },
-
-  // setup(props): any {
+  props: {},
   setup(): any {
     const showOverlay = ref<boolean>();
     const searchfor = ref<string>();
@@ -41,8 +32,6 @@ export default defineComponent({
       "schedule",
     ];
 
-    // let tvShows: Show[] = [];
-    
     // TODO: Code duplication
     const extractTvShowDataByProps = (tvShow: any, props: string[]): Show[] => {
       return props.reduce((aShow: any, prop: string) => {
@@ -53,8 +42,9 @@ export default defineComponent({
       }, {});
     };
 
-    const toggleOverlay = (): void => {
+    const toggleOverlay = (id: any): void => {
       showOverlay.value = !showOverlay.value;
+      console.log('PSP-ID', id);
     };
 
     // TODO: Code duplication
@@ -79,11 +69,11 @@ export default defineComponent({
     showOverlay.value = false;
     return {
       searchfor,
-      tvShows,
-      tvShowDetail,
       showOverlay,
       startSearch,
       toggleOverlay,
+      tvShows,
+      tvShowDetail,
     };
   },
 });
@@ -105,16 +95,16 @@ export default defineComponent({
           <button :disabled="!searchfor"><IconSearch /></button>
         </fieldset>
       </form>
-      <TVShowCard
-        v-for="show in tvShows"
-        :key="show.id"
-        :tvShow="show"
-        class="tvShowCard"
-        @click="toggleOverlay(show.id)"
-      ></TVShowCard>
+      <div class="search__result">
+        <TVShowCard
+          v-for="show in tvShows"
+          :key="show.id"
+          :tvShow="show"
+          class="tvShowCard"
+          @click="toggleOverlay(show.id)"
+        ></TVShowCard>
+      </div>
     </div>
-    {{ tvShows }}
-    :tvShow="tvShowDetail"
 
     <teleport to="#modal-area">
       <TVShowOverlay
@@ -136,8 +126,14 @@ button:disabled svg {
 }
 
 fieldset {
+  border: 0;
+  margin: 0 auto;
+  padding: 0;
+  width: fit-content;
+}
+form {
   border: none;
-  padding: 0 0 0 1rem;
+  width: auto;
 }
 
 h1 {
@@ -162,10 +158,27 @@ input:focus {
 svg {
   transform: scale(1.6);
 }
+
+.search__result {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
 @media (min-width: 1024px) {
+  fieldset {
+    margin: 0 0 0 1rem;
+  }
+
   h1 {
     padding-left: 1rem;
     text-align: initial;
+  }
+
+  .search__result {
+    justify-content: flex-start;
   }
 }
 </style>
