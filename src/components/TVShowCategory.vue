@@ -1,5 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import IconExpandLess from "@/components/icons/IconExpandLess.vue";
+import IconExpandMore from "@/components/icons/IconExpandMore.vue";
 import TvShowCard from "@/components/TVShowCard.vue";
 import TVShowOverlay from "@/components/TVShowOverlay.vue";
 import type { Show } from "@/tvAppTypes";
@@ -9,6 +11,8 @@ import type { Show } from "@/tvAppTypes";
 // https://www.bezkoder.com/vue-3-typescript-axios/
 export default defineComponent({
   components: {
+    IconExpandLess,
+    IconExpandMore,
     TvShowCard,
     TVShowOverlay,
   },
@@ -30,6 +34,7 @@ export default defineComponent({
     const myShows = props.tvShows; // TODO: Add genre filter, if time
 
     const showOverlay = ref<boolean>();
+    const viewCardsHorizontal = ref<boolean>();
     const tvShowDetail = ref<Show | undefined>();
 
     const getTvShowById = (id: string): Show => {
@@ -49,16 +54,32 @@ export default defineComponent({
       tvShowDetail.value = getTvShowById(id);
     };
 
-    showOverlay.value = false;
+    const toggleCardView = (): void => {
+      viewCardsHorizontal.value = !viewCardsHorizontal.value;
+    };
 
-    return { myShows, tvShowDetail, showOverlay, toggleOverlay };
+    showOverlay.value = false;
+    viewCardsHorizontal.value = true;
+
+    return {
+      myShows,
+      tvShowDetail,
+      showOverlay,
+      toggleCardView,
+      toggleOverlay,
+      viewCardsHorizontal,
+    };
   },
 });
 </script>
 
 <template>
-  <h1>{{ genre }}</h1>
-  <div class="moviesInCategory">
+  <div class="titlebar">
+    <h1>{{ genre }}</h1>
+    <IconExpandLess v-if="!viewCardsHorizontal" @click="toggleCardView" />
+    <IconExpandMore v-if="viewCardsHorizontal" @click="toggleCardView" />
+  </div>
+  <div class="moviesInCategory" :class="{ vertical: !viewCardsHorizontal }">
     <TvShowCard
       v-for="show in myShows"
       :key="show.id"
@@ -77,6 +98,22 @@ export default defineComponent({
 </template>
 
 <style scoped>
+h1 {
+  font-size: 120%;
+  margin-bottom: 0;
+  text-align: center;
+}
+.titlebar > svg {
+  display: block;
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+}
+.titlebar > svg:hover {
+  cursor: pointer;
+  fill: var(--vt-c-secundair);
+}
+
 .moviesInCategory {
   display: flex;
   flex-wrap: nowrap;
@@ -84,16 +121,20 @@ export default defineComponent({
   overflow-x: scroll;
   width: 100%;
 }
+.moviesInCategory.vertical {
+  flex-wrap: wrap;
+  overflow-x: auto;
+}
 
-h1 {
-  font-size: 120%;
-  margin-bottom: 0;
-  text-align: center;
+.titlebar {
+  border-bottom: thin solid var(--vt-c-primair);
+  box-sizing: border-box;
+  margin: 0 1rem;
+  position: relative;
 }
 
 @media (min-width: 1024px) {
   h1 {
-    padding-left: 1rem;
     text-align: initial;
   }
 }
