@@ -22,8 +22,8 @@ Identifying aspects I need to work on, but only when I have time.
 ### Clone the repository, install, and run project for development
 
 ```sh
-git clone https://github.com/xxx/xx.git
-cd xxx
+git clone https://github.com/itsMeBender/vue-project.git
+cd vue-project
 npm install
 npm run dev
 ```
