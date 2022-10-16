@@ -10,11 +10,9 @@ const props = defineProps<{
 
 let tvImg: string;
 if (props?.tvShow?.image?.original) {
-  tvImg = new URL(`${props.tvShow.image.original}`, import.meta.url)
-  .href;
+  tvImg = new URL(`${props.tvShow.image.original}`, import.meta.url).href;
 } else {
-  tvImg = new URL('/src/assets/noimage.png', import.meta.url)
-  .href;
+  tvImg = new URL("/src/assets/noimage.png", import.meta.url).href;
 }
 </script>
 
@@ -32,7 +30,12 @@ if (props?.tvShow?.image?.original) {
         />
         <h1>{{ props.tvShow.name }}</h1>
         <div v-html="props.tvShow.summary"></div>
-        <button @click="toggle">Close</button>
+        <nav>
+          <button @click="toggle">Close</button>
+          <router-link :to="`/details/id=${tvShow.id}`" class="btn__details"
+            >Details</router-link
+          >
+        </nav>
       </div>
     </div>
   </div>
@@ -42,6 +45,19 @@ if (props?.tvShow?.image?.original) {
 img {
   cursor: pointer;
   width: 100%;
+}
+
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.btn__details,
+button {
+  width: calc(50% - 2em);
+  margin: 1em;
+  text-align: center;
 }
 
 .dialog {

@@ -48,7 +48,6 @@ export default defineComponent({
       const selecteShow = tvShows.value!.find((show: Show) => {
         return show.id.toString() === id;
       });
-      console.log('PSP-Z', selecteShow!.name);
       if (selecteShow) {
         return selecteShow;
       } else {
@@ -59,8 +58,7 @@ export default defineComponent({
 
     const toggleOverlay = (id: any): void => {
       showOverlay.value = !showOverlay.value;
-      if (typeof id === 'number' ) {
-        console.log("PSP-ID", id, getTvShowById(id.toString()).name);
+      if (typeof id === "number") {
         tvShowDetail.value = getTvShowById(id.toString());
       }
     };

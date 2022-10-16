@@ -12,10 +12,9 @@ const props = defineProps<{
 let thumbnailUri: string;
 if (props?.tvShow?.image?.medium) {
   thumbnailUri = new URL(`${props.tvShow.image.original}`, import.meta.url)
-  .href;
+    .href;
 } else {
-  thumbnailUri = new URL('/src/assets/noimage.png', import.meta.url)
-  .href;
+  thumbnailUri = new URL("/src/assets/noimage.png", import.meta.url).href;
 }
 
 const addShowToList = () => {
@@ -38,8 +37,9 @@ const addShowToList = () => {
     <div class="title">{{ tvShow.name }}</div>
     <div class="rating"><span>Rating:</span> {{ tvShow.rating.average }}</div>
     <nav>
-      <a href="#" @click="toggle">Info</a
-      ><a href="#" @click="addShowToList">Watch</a>
+      <a href="javascript:void(0);" @click="toggle">Zoom</a>
+      <router-link :to="`/details/id=${tvShow.id}`">Details</router-link>
+      <a href="javascript:void(0);" @click="addShowToList">Watch</a>
     </nav>
   </div>
 </template>

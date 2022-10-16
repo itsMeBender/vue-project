@@ -16,7 +16,7 @@
   --color-text: var(--vt-c-text-light-1);
 }
 
-@media (prefers-color-scheme: light) { /** TODO PSP **/
+@media (prefers-color-scheme: light) {
   :root {
     --color-background: var(--vt-c-primair-lite);
     --color-text: var(--vt-c-text-light-2);

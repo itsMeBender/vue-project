@@ -7,8 +7,7 @@ describe("TVShowCard", () => {
   // See "./cypress/fixtures"
   // const tvShows: Show[] = [];
 
-  let psp = false; // It works, but probably not clean
-
+  let toggleState = false;
   it("renders properly", () => {
     const wrapper = mount(TVShowOverlay, {
       props: {
@@ -26,7 +25,7 @@ describe("TVShowCard", () => {
           },
         },
         toggle: () => {
-          psp = !psp;
+          toggleState = !toggleState;
         },
       },
       async mounted() {
@@ -46,9 +45,9 @@ describe("TVShowCard", () => {
     expect(wrapper.find("img").attributes("alt")).toBe("Name of tv-show two");
 
     wrapper.find("img").trigger("click");
-    expect(psp).toBe(true);
+    expect(toggleState).toBe(true);
 
     wrapper.find("button").trigger("click");
-    expect(psp).toBe(false);
+    expect(toggleState).toBe(false);
   });
 });

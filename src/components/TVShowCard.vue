@@ -8,11 +8,9 @@ const props = defineProps<{
 
 let thumbnailUri: string;
 if (props?.tvShow?.image?.medium) {
-  thumbnailUri = new URL(`${props.tvShow.image.medium}`, import.meta.url)
-  .href;
+  thumbnailUri = new URL(`${props.tvShow.image.medium}`, import.meta.url).href;
 } else {
-  thumbnailUri = new URL('/src/assets/noimage.png', import.meta.url)
-  .href;
+  thumbnailUri = new URL("/src/assets/noimage.png", import.meta.url).href;
 }
 </script>
 
